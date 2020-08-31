@@ -2,46 +2,47 @@ var currentDay = document.querySelector("#currentDay");
 let currentHour = parseInt(moment().format('H'));
 const rowsEl = document.getElementsByClassName("row");
 
+
+
 //check each row for row time vs current time, apply/remove classes accordingly
-Array.from(rowsEl).forEach(row => {
-    let rowIdString = row.id, rowTime;
-    if (rowIdString) {
-        rowTime = parseInt(rowIdString);
-    }
+$(".time-block").each(function() {
+    var rowTime = parseInt($(this).attr("id"));
+    console.log(rowTime + "rowTime");
+
     if (rowTime) {
         if (currentHour === rowTime) {
-            $(rowsEl).addClass("present")
-            $(rowsEl).removeClass("past")
-            $(rowsEl).removeClass("future")
+            $(this).addClass("present")
+            $(this).removeClass("past")
+            $(this).removeClass("future")
         }
-        else if (currentHour < rowTime) {
-            $(rowsEl).addClass("past")
-            $(rowsEl).removeClass("present")
-            $(rowsEl).removeClass("future")
+        else if (currentHour > rowTime) {
+            $(this).addClass("past")
+            $(this).removeClass("present")
+            $(this).removeClass("future")
         }
         else {
-            $(rowsEl).addClass("future")
-            $(rowsEl).removeClass("past")
-            $(rowsEl).removeClass("present")
+            $(this).addClass("future")
+            $(this).removeClass("past")
+            $(this).removeClass("present")
         }
     };
 
 });
+
+//save clicked
+// $(".saveBtn").on("click", "button", function() {
+
+// })
+
+// var saveTask = function() {
+//     localStorage.setItem("tasks", JSON.stringify(tasks))
+// }
+
 
 // display date and time
 setInterval(function(audit) {
     currentDay.textContent = moment().format('MMMM Do YYYY, h:mm:ss a');
     var time = currentDay
     console.log(time);
-
-    // if (moment().isAfter(time)) {
-    //     $(audit).addClass("past");
-    // }
-    // else if (Math.abs(moment().diff(time, "hours")) <=1) {
-    //     $(audit).addClass("present")
-    // }
-    // else {
-    //     $(audit).addClass("future")
-    // }
 }, 1000);
 
