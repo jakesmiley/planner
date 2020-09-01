@@ -29,15 +29,20 @@ $(".time-block").each(function() {
 
 });
 
+var loadDay = function() {
+    var thisDay = JSON.parse(localStorage.getItem("tasks"));
+    console.log(thisDay);
+
+    $()
+};
+
 //save clicked
-// $(".saveBtn").on("click", "button", function() {
+$(".saveBtn").on("click", function() {
+    event.preventDefault();
+    var tasks = $(this).siblings(".description").val();
 
-// })
-
-// var saveTask = function() {
-//     localStorage.setItem("tasks", JSON.stringify(tasks))
-// }
-
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+});
 
 // display date and time
 setInterval(function(audit) {
@@ -46,3 +51,4 @@ setInterval(function(audit) {
     console.log(time);
 }, 1000);
 
+loadDay();
